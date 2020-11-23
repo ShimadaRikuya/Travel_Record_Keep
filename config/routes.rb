@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get 'maps/index'
+  devise_for :users
   root to: 'maps#index'
   resources :maps, only: [:index]
 
