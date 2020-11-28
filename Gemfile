@@ -58,3 +58,12 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'dotenv-rails'
 gem 'devise'
 gem 'omniauth-google-oauth2'
+gem 'carrierwave'
+gem 'rmagick'
+
+# 日本語化
+gem 'rails-i18n', '~> 6.0'
+gem 'devise-i18n'
+
+# Bootstrap
+gem 'devise-bootstrap-views', '~> 1.0'

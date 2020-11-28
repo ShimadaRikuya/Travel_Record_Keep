@@ -7,6 +7,8 @@ class User < ApplicationRecord
   validates :name,    presence: true
   validates :profile, length: { maximum: 200 }
 
+  mount_uploader :avatar, AvatarUploader
+  
   # パスワードなしでアップデート
   def update_without_current_password(params, *options)
     params.delete(:current_password)

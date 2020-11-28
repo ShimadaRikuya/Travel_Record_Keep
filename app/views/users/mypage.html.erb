@@ -1,0 +1,23 @@
+<h3>マイページ</h3>
+
+<h1>こんにちは、<%= @users.name %>さん</h1>
+
+<% if current_user.persisted? && current_user.avatar? %>
+  <h1>メールアドレス</h1>
+  <%= @users.email %>
+  <h1>プロフィール</h1>
+  <%= @users.profile%>
+  <h1>プロフィール画像</h1>
+  <div class="circle-avatar">
+    <img src="<%= "#{@users.avatar}" %>">
+  </div>
+<% else %>
+  h1>メールアドレス</h1>
+  <%= @users.email %>
+  <h1>プロフィール</h1>
+  <%= @users.profile%>
+  <h1>プロフィール画像</h1>
+  <div class="circle-avatar">
+    <%= image_tag 'no_avatar.png' %>
+  </div>
+<% end %>
