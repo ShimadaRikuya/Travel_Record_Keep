@@ -1,4 +1,14 @@
-<%= render 'shared/header' %>
+<h3>マイページ</h3>
 
-<h1>こんにちは、<%= @users.name %>さん</h1>
-<p>ユーザー用ページです。</p>
+<h1>こんにちは、<%= current_user.name %>さん</h1>
+
+<h1>メールアドレス</h1>
+<%= @user.email %>
+<h1>プロフィール</h1>
+<%= @user.profile%>
+<h1>プロフィール画像</h1>
+<div class="circle-avatar">
+  <img src="<%= "#{@user.avatar}" %>">
+</div>
+
+<div><%= link_to 'トップへ', root_path %></div>

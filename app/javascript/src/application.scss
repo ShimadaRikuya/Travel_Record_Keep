@@ -1,0 +1,29 @@
+@import '~bootstrap/scss/bootstrap';
+
+@import '~@fortawesome/fontawesome-free/scss/fontawesome';
+
+/* ログイン画面 */
+
+.container-login {
+  @extend .container-fluid;
+  max-width: 576px;
+  padding: 2rem;
+}
+ 
+  /*「ログインしました」などのフラッシュ用スタイル */
+ 
+.alert-notice {
+  @extend .alert-info;
+}
+ 
+.alert-alert {
+  @extend .alert-danger;
+}
+
+
+.circle-avatar img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+}

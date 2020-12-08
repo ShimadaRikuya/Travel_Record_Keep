@@ -1,7 +1,6 @@
-<%= render 'shared/header' %>
+<%= render 'shared/flash_messages' %>
 
-<h1>こんにちは、<%= current_user.name %>さん</h1>
-<p>ユーザー用ページです。</p>
+<p>トップページです。</p>
 
 <h2>gmap</h2>
 
@@ -65,3 +64,5 @@ function codeAddress(){
 
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_API_KEY'] %>" async defer></script>
+
+<div><%= link_to 'トップへ', root_path %></div>

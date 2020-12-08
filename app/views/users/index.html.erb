@@ -1,0 +1,13 @@
+<h1>こんにちは、<%= current_user.name %>さん</h1>
+
+<h1 class="text-center col-mb-3">All users</h1>
+
+<div class="container">
+  <% @users.each do |user| %>
+    <div class="col-mb-4">
+      <a href="/users/<%= user.id %>"><%= user.name %></a>
+    </div>
+  <% end %>
+</div>
+
+<div><%= link_to 'トップへ', root_path %></div>

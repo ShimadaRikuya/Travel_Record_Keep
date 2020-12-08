@@ -1,61 +1,71 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<div class="card col-sm-6 mx-auto mt-5">
+  <div class="card-body">
+    <h3 class="text-center mt-1 mb-4">アカウントを編集する</h3>
+    <%= devise_error_messages! %>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+    
 
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
-  </div>
+      <div class="form-group">
+        <%= f.label :名前, :class => "form-label" %><br />
+        <%= f.text_field :name, autofocus: true, autocomplete: "name", :class => "form-control" %>
+      </div>
+      
+      <div class="form-group">
+        <%= f.label :email, :class => "form-label" %><br />
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", :class => "form-control" %>
+      </div>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+        <%# アカウント編集時にプロフィールを入力できるようにフォームを追加 %>
+      <div class="form-group">
+        <%= f.label :profile, :class => "form-label" %><br />
+        <%= f.text_area :profile, autofocus: true, :class => "form-control" %>
+      </div>
 
-  <%# アカウント編集時にプロフィールを入力できるようにフォームを追加 %>
-  <div class="field">
-    <%= f.label :profile %><br />
-    <%= f.text_area :profile, autofocus: true %>
-  </div>
+      <div class="circle-avatar">
+        <img id="avatar_img_prev" src="#" class='hidden' />
+        <% if current_user.persisted? && current_user.avatar? %>
+          <%= image_tag current_user.avatar.to_s %>
+          <label><%= f.check_box :remove_avatar %> 画像を削除</label>
+        <% else %>
+          <%= image_tag 'no_avatar.png' %>
+          <%= f.hidden_field :avatar_cache %>
+        <% end %>
+          <%= f.file_field :avatar, id: 'post_img' %>
+      </div>
 
-  <div class="circle-avatar">
-    <img id="avatar_img_prev" src="#" class='hidden' />
-    <% if current_user.persisted? && current_user.avatar? %>
-      <%= image_tag current_user.avatar.to_s %>
-      <label><%= f.check_box :remove_avatar %> 画像を削除</label>
-    <% else %>
-      <%= image_tag 'no_avatar.png' %>
-      <%= f.hidden_field :avatar_cache %>
+      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+        <div><%= t('.currently_waiting_confirmation_for_email', email: resource.unconfirmed_email) %></div>
+      <% end %>
+
+      <div class="form-group">
+        <%= f.label :password, :class => "form-label" %> <i>(<%= t('.leave_blank_if_you_don_t_want_to_change_it') %>)</i><br />
+        <%= f.password_field :password, autocomplete: "new-password", :class => "form-control" %>
+        <% if @minimum_password_length %>
+          <br />
+          <em><%= t('devise.shared.minimum_password_length', count: @minimum_password_length) %></em>
+        <% end %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :password_confirmation, :class => "form-label" %><br />
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", :class => "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :current_password, :class => "form-label" %> <i>(<%= t('.we_need_your_current_password_to_confirm_your_changes') %>)</i><br />
+        <%= f.password_field :current_password, autocomplete: "current-password", :class => "form-control" %>
+      </div>
+
+      <div class="actions">
+        <%= f.submit t('.update'), class: 'btn btn-primary btn-block' %>
+      </div>
     <% end %>
-      <%= f.file_field :avatar, id: 'post_img' %>
+
+    <h3><%= t('.cancel_my_account') %></h3>
+
+    <p><%= t('.unhappy') %> <%= button_to t('.cancel_my_account'), registration_path(resource_name), data: { confirm: t('.are_you_sure') }, method: :delete %></p>
+
+    <%= link_to t('devise.shared.links.back'), :back, :class => "btn btn-secondary btn-block" %>
   </div>
-
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-    <% if @minimum_password_length %>
-      <br />
-      <em><%= @minimum_password_length %> characters minimum</em>
-    <% end %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Update" %>
-  </div>
-<% end %>
-
-<h3>Cancel my account</h3>
-
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
-
-<%= link_to "Back", :back %>
+</div>

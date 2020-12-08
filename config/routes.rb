@@ -7,8 +7,7 @@ Rails.application.routes.draw do
     omniauth_callbacks: 'users/omniauth_callbacks',
     registrations: 'users/registrations'
   }
-  get "users/show" => "users#show"
-  get '/mypage' => 'users#mypage'
+  resources :users, only: [:index, :show]
 
   devise_scope :user do
     get '/users/auth/:provider/upgrade' => 'users/omniauth_callbacks#upgrade', as: :user_omniauth_upgrade
